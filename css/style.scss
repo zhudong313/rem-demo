@@ -1,0 +1,171 @@
+//sass可以写单行注释，css只有多行注释
+$fs:75px; //效果图的十分之一
+//混淆，px换算rem
+@mixin px2rem($property,$px-values,$baseline-px:$fs){ 
+    $baseline-rem: $baseline-px/1rem * 1; 
+    @if type-of($px-values) == "number"{ 
+        #{$property}: $px-values / $baseline-rem; 
+    } @else { 
+        $rem-values:(); 
+        @each $value in $px-values{ 
+            @if $value == 0 or type-of($value) != "number"{ 
+                $rem-values: append($rem-values, $value ); 
+            } 
+            @else{
+                $rem-values:append($rem-values,$value/$baseline-rem);
+            }
+        } 
+        #{$property}: $rem-values; 
+    } 
+}
+//函数, px换算rem
+@function px2rem($val){
+    @return $val/$fs*1rem;
+}
+//变量
+$link: #3d3f4e;
+$color: #333;
+/*初始化*/
+*{margin: 0; padding: 0;}
+li{list-style: none;}
+a{ color: $link; text-decoration: none;}
+html{ background-color: #f6f8f7; }
+body{ font-family: '微软雅黑'; color: $color; font-size: 12px;}
+/*公共*/
+.clearfix:before,.clearfix:after{ content: ''; display: table;}
+.clearfix:after{ clear: both;}
+.layer{ max-width: px2rem($fs * 10); margin: 0 auto;}
+.yellow{
+    position: relative;
+    z-index: 2;
+    &:after{
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        z-index: -1;
+        transform: translate(0, -50%); //转换，垂直方向偏移50%
+        width: 100%;
+        height: px2rem(19px);
+        background-color: #fdff04;
+        border-radius: px2rem(10px);
+    }
+}
+/*头部*/
+.header{ 
+    img {
+        width: 100%;
+    }
+}
+/*正文*/
+.description{
+    margin-top: px2rem(75px);
+    margin-bottom: px2rem(50px);
+    //height: px2rem(120px); //与下面混淆等价
+    @include px2rem(height,120px);
+    background: url(../img/text-bg.jpg) no-repeat;
+    background-size: 100% auto;
+    .text{
+        width: px2rem(584px);
+        height: px2rem(102px);
+        line-height: px2rem(34px);
+        padding: px2rem(12px) 0 0 px2rem(90px);
+        font-size: px2rem(28px);
+    }
+}
+.circle{
+    display: flex;
+    margin: px2rem(36px) auto 0;
+    box-sizing: border-box;
+    width: px2rem(693px);
+    height: px2rem(121px);
+    border-radius: px2rem(121px/2);
+    border: px2rem(2px) #3d3f4e solid;
+    .icon{
+        flex: none;
+        width: px2rem(149px);
+        border-right: px2rem(2px) #3d3f4e solid;
+        background-position: px2rem(38px) center;
+        background-repeat: no-repeat;
+    }
+    .text{
+        padding-left: px2rem(22px);
+        .title{
+            margin-top: px2rem(5px);
+            line-height: px2rem(60px);
+            font-size: px2rem(28px);
+        }
+        .descr{
+            line-height: px2rem(30px);
+            font-size: px2rem(24px);
+            color: #666;
+        }
+    }
+    &.circle1{
+        .icon{
+            background-image: url(../img/icon-1.jpg);
+            background-size: px2rem(88px) px2rem(82px);
+        }
+    }
+    &.circle2{
+        height: px2rem(145px);
+        border-radius: px2rem(145px/2);
+        .icon{
+            background-image: url(../img/icon-2.jpg);
+            background-size: px2rem(88px) px2rem(78px);
+        }
+    }
+    &.circle3{
+        height: px2rem(145px);
+        border-radius: px2rem(145px/2);
+        .icon{
+            background-image: url(../img/icon-3.jpg);
+            background-size: px2rem(91px) px2rem(80px);
+        }
+    }
+}
+.web-title{ 
+    text-align: center;
+    margin-top: px2rem(52px); 
+    font-size: px2rem(28px);
+    line-height: px2rem(74px);
+    color: $link;
+}
+.web-description{
+    position: relative;
+    margin: 0 0 0 px2rem(80px);
+    padding-left: px2rem(15px);
+    line-height: px2rem(30px);
+    font-size: px2rem(24px);
+    &:before{
+        content: '';
+        position: absolute;
+        left: px2rem(-4px);
+        top: px2rem(7px);
+        width: px2rem(4px);
+        height: px2rem(20px);
+        background-color: #3bb8c4;
+    }
+}
+.bg{
+    width: 100%;
+    height: px2rem(583px);
+    background: url(../img/bg.jpg) no-repeat center top;
+    background-size: auto 100%;
+    margin: px2rem(-14px) 0 px2rem(-24px);
+}
+.link{
+    display: block;
+    width: px2rem(642px);
+    height: px2rem(117px);
+    margin: px2rem(85px) 0 0 px2rem(48px);
+    background: url(../img/link-bg.jpg) no-repeat;
+    background-size: 100% 100%;
+}
+.bottom{
+    margin-top: px2rem(63px);
+    width: 100%;
+    height: px2rem(142px);
+    background: url(../img/bottom.jpg) no-repeat center top;
+    background-size: auto 100%;
+}

@@ -1,0 +1,15 @@
+{
+  "name": "huabei",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node-sass -w ./css/style.scss ./css/style.css",
+    "build": "node-sass ./css/style.scss ./css/style.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-sass": "^4.11.0"
+  }
+}
